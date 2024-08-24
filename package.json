@@ -1,0 +1,21 @@
+{
+  "name": "hardhat-project",
+    "scripts": {
+      "build": "tsc",
+      "start": "node dist/main.js",
+      "dev": "ts-node",
+      "run-ts": "ts-node"
+    },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ethers": "^5.4.0",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^16.11.7",
+    "@types/node-fetch": "^2.6.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.5.5"
+  }
+}
