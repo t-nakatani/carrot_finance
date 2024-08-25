@@ -1,12 +1,13 @@
 {
   "name": "hardhat-project",
-    "scripts": {
-      "build": "tsc",
-      "start": "node dist/main.js",
-      "dev": "ts-node",
-      "run-ts": "ts-node"
-    },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "ts-node",
+    "run-ts": "ts-node"
+  },
   "dependencies": {
+    "@influxdata/influxdb3-client": "^0.10.0",
     "dotenv": "^16.3.1",
     "ethers": "^5.4.0",
     "node-fetch": "^2.7.0"

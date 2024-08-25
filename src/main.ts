@@ -1,7 +1,8 @@
 import { fetchCoinGeckoPrice } from './priceFetcher';
 import { getBalanceOf } from './tokenContract'
 import { xBNB, wGAS10, xBNB_wGAS10Pool } from './const';
-import { sleep, getISOTimestamp } from './utils';
+import { getISOTimestamp } from './utils';
+import { DBWriter } from './monitoring/writer';
 
 async function checkLiquidity() {
   try {
@@ -17,7 +18,10 @@ async function checkLiquidity() {
 
     const xBNBValue = parseFloat(xBnbBalance) * priceData.binancecoin;
     const wGASValue = parseFloat(wGasBalance) * priceData.gas;
+    const liquidityRatio: number = xBNBValue / wGASValue;
     console.log(`xBNB: ${xBNBValue} / wGAS: ${wGASValue} = ${xBNBValue / wGASValue}\n`);
+
+    return liquidityRatio;
 
     // const myAddress = config.MY_ADDRESS as string;
     // const myBalance = await getBalanceOf(xBNB, myAddress);
@@ -28,10 +32,10 @@ async function checkLiquidity() {
 }
 
 async function main() {
-  while(1) {  
-    await checkLiquidity();
-    await sleep(30 * 1000);
-  }
+  const writer = new DBWriter('arbitrage');
+  const liquidityRatio = await checkLiquidity() as number;
+
+  await writer.writeData('ratio', 'carrot_xbnb_wgas', liquidityRatio);
 }
 
 main();
