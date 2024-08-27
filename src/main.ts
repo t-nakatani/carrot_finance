@@ -19,7 +19,7 @@ async function checkLiquidity() {
     const xBNBValue = parseFloat(xBnbBalance) * priceData.binancecoin;
     const wGASValue = parseFloat(wGasBalance) * priceData.gas;
     const liquidityRatio: number = xBNBValue / wGASValue;
-    console.log(`xBNB: ${xBNBValue} / wGAS: ${wGASValue} = ${xBNBValue / wGASValue}\n`);
+    console.log(`xBNB: ${xBNBValue} / wGAS: ${wGASValue} = ${liquidityRatio}\n`);
 
     return liquidityRatio;
 
@@ -35,7 +35,7 @@ async function main() {
   const writer = new DBWriter('arbitrage');
   const liquidityRatio = await checkLiquidity() as number;
 
-  await writer.writeData('ratio', 'carrot_xbnb_wgas', liquidityRatio);
+  await writer.writeData('ratio_v2', 'carrot_xbnb_wgas', liquidityRatio);
 }
 
 main();

@@ -16,7 +16,7 @@ export class DBWriter {
     }
 
     async writeData(measurement: string, fieldName: string, value: number): Promise<void> {
-        const point: Point = Point.measurement(measurement).setIntegerField(fieldName, value);
+        const point: Point = Point.measurement(measurement).setFloatField(fieldName, value);
         await this.client.write(point, this.database);
     }
 }
